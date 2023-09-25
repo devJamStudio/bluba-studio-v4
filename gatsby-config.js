@@ -38,8 +38,7 @@ module.exports = {
           "Subscription",
           "Price",
         ],
-        secretKey:
-          "sk_test_51NtaK1G6vc4GoClWsRXPx4rBIOt38QLe1013vU9raJn8HtPOB4wIFQxLRXzxdeQ1MciR3Vcmk9ZVkJlsXItAnQQk00IzegEmli",
+        secretKey: process.env.STRIPE_SECRET,
         downloadFiles: true,
       },
     },
