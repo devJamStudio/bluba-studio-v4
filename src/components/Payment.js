@@ -21,13 +21,16 @@ export default function App(product) {
   const fetchClientSecret = async () => {
     try {
       // Make a request to your Netlify Lambda function to create a payment intent
-      const response = await axios.post("/.netlify/functions/checkout", {
-        amount: amount, // Set the correct amount
-        currency: currency,
-        id: id,
-        description: productItem.product.name,
-        metadata: { product: productItem.product.name },
-      });
+      const response = await axios.post(
+        "https://regal-macaron-074ff6.netlify.app/.netlify/functions/checkout",
+        {
+          amount: amount, // Set the correct amount
+          currency: currency,
+          id: id,
+          description: productItem.product.name,
+          metadata: { product: productItem.product.name },
+        }
+      );
 
       setClientSecret(response.data.clientSecret);
     } catch (error) {

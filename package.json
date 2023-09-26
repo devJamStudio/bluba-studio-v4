@@ -32,8 +32,7 @@
     "react-dom": "^18.2.0",
     "react-helmet": "^6.1.0",
     "sass": "^1.49.7",
-    "stripe": "^13.7.0",
-    "use-shopping-cart": "^3.1.8"
+    "stripe": "^13.7.0"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.16",
