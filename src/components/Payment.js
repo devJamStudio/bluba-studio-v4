@@ -1,13 +1,11 @@
-// CheckoutPage.js
 import React, { useState } from "react";
 import { Elements } from "@stripe/react-stripe-js";
-import { loadStripe } from "@stripe/stripe-js";
+import { loadStripe } from "@stripe/stripe-js"; // Import from '@stripe/stripe-js'
+import getStripe from "../utils/getStripe";
 import CheckoutForm from "./Form";
 import axios from "axios";
-
-// Make sure to call `loadStripe` outside of a component’s render to avoid
-// recreating the `Stripe` object on every render.
-const stripePromise = loadStripe(process.env.GATSBY_STRIPE_PUBLISHABLE_KEY);
+import AdressForm from "./AdressForm";
+const stripePromise = getStripe();
 
 export default function App(product) {
   const [clientSecret, setClientSecret] = useState(null);
@@ -20,17 +18,35 @@ export default function App(product) {
 
   const fetchClientSecret = async () => {
     try {
-      // Make a request to your Netlify Lambda function to create a payment intent
-      const response = await axios.post(
-        "https://regal-macaron-074ff6.netlify.app/.netlify/functions/checkout",
-        {
-          amount: amount, // Set the correct amount
-          currency: currency,
-          id: id,
-          description: productItem.product.name,
-          metadata: { product: productItem.product.name },
-        }
-      );
+      const response = await axios.post("/.netlify/functions/checkout", {
+        amount: amount,
+        currency: currency,
+        id: id,
+        description: productItem.product.name,
+        metadata: { product: productItem.product.name },
+        shipping_options: [
+          {
+            shipping_rate_data: {
+              type: "fixed_amount",
+              fixed_amount: {
+                amount: 0,
+                currency: "pln",
+              },
+              display_name: "Free shipping",
+              delivery_estimate: {
+                minimum: {
+                  unit: "business_day",
+                  value: 5,
+                },
+                maximum: {
+                  unit: "business_day",
+                  value: 7,
+                },
+              },
+            },
+          },
+        ],
+      });
 
       setClientSecret(response.data.clientSecret);
     } catch (error) {
@@ -49,6 +65,8 @@ export default function App(product) {
 
       {clientSecret && (
         <Elements stripe={stripePromise} options={options}>
+          <AdressForm />
+
           <CheckoutForm />
         </Elements>
       )}

@@ -1,19 +1,34 @@
-import { ElementsConsumer, PaymentElement } from "@stripe/react-stripe-js";
+import {
+  ElementsConsumer,
+  PaymentElement,
+  AddressElement,
+} from "@stripe/react-stripe-js";
 import React from "react";
+import AdressForm from "./AdressForm";
+
 class CheckoutForm extends React.Component {
   handleSubmit = async (event) => {
     // We don't want to let default form submission happen here,
     // which would refresh the page.
     event.preventDefault();
 
-    const { stripe, elements } = this.props;
-
     if (!stripe || !elements) {
       // Stripe.js hasn't yet loaded.
       // Make sure to disable form submission until Stripe.js has loaded.
       return;
     }
-
+    const { stripe, elements } = this.props;
+    const options = {
+      // your other options here
+      paymentRequest: stripe.paymentRequest({
+        country: "NL",
+        currency: "eur",
+        total: {
+          label: "Demo total",
+          amount: 1000,
+        },
+      }),
+    };
     const result = await stripe.confirmPayment({
       //`Elements` instance that was used to create the Payment Element
       elements,
@@ -34,10 +49,12 @@ class CheckoutForm extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <PaymentElement />
-        <button disabled={!this.props.stripe}>Submit</button>
-      </form>
+      <Elemnents>
+        <form onSubmit={this.handleSubmit}>
+          <PaymentElement />
+          <button disabled={!this.props.stripe}>Submit</button>
+        </form>
+      </Elemnents>
     );
   }
 }

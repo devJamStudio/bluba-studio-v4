@@ -37,6 +37,7 @@
   "devDependencies": {
     "autoprefixer": "^10.4.16",
     "gatsby-plugin-postcss": "^6.12.0",
+    "netlify-cli": "^16.4.2",
     "postcss": "^8.4.30",
     "tailwindcss": "^3.3.3"
   }
