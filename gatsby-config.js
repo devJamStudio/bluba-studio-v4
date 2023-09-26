@@ -42,5 +42,18 @@ module.exports = {
         downloadFiles: true,
       },
     },
+    {
+      resolve: `gatsby-plugin-use-shopping-cart`,
+      options: {
+        mode: "payment",
+        cartMode: "client-only",
+        stripePublicKey: process.env.GATSBY_STRIPE_PUBLISHABLE_KEY,
+        successUrl: "https://www.google.com", // url must start with http or https
+        cancelUrl: "https://www.stripe.com", // url must start with http or https
+        currency: "PLN",
+        allowedCountries: ["PL", "GB", "CA"],
+        billingAddressCollection: true,
+      },
+    },
   ],
 };

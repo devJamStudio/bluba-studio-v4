@@ -1,5 +1,6 @@
 import React from "react";
 import { graphql, StaticQuery } from "gatsby";
+import { GatsbyImage, getImage } from "gatsby-plugin-image"; // Import Gatsby Image components
 import ProductCard from "./ProductCard";
 
 const containerStyles = {
@@ -29,6 +30,11 @@ const Products = () => {
                   id
                   name
                   images
+                  localFiles {
+                    childrenImageSharp {
+                      gatsbyImageData
+                    }
+                  }
                 }
               }
             }
@@ -48,9 +54,20 @@ const Products = () => {
         }
         return (
           <div style={containerStyles}>
-            {Object.keys(products).map((key) => (
-              <ProductCard key={products[key].id} product={products[key]} />
-            ))}
+            {Object.keys(products).map((key) => {
+              const product = products[key];
+              const image =
+                product.localFiles[0].childrenImageSharp[0].gatsbyImageData;
+              return (
+                <ProductCard
+                  key={product.id}
+                  product={product}
+                  image={
+                    product.localFiles[0].childrenImageSharp[0].gatsbyImageData
+                  }
+                />
+              );
+            })}
           </div>
         );
       }}

@@ -4,7 +4,7 @@ import { StaticQuery, graphql } from "gatsby";
 
 import Header from "./header";
 import "./layout.css";
-
+import ShoppingCart from "./ShoppingCart";
 const Layout = ({ children }) => (
   <StaticQuery
     query={graphql`
@@ -28,6 +28,8 @@ const Layout = ({ children }) => (
           }}
         >
           {children}
+          <ShoppingCart />
+
           <footer>
             © {new Date().getFullYear()}, Built with
             {` `}
