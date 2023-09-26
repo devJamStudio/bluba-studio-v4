@@ -13,12 +13,7 @@ class CheckoutForm extends React.Component {
       // Make sure to disable form submission until Stripe.js has loaded.
       return;
     }
-    const appearance = {
-      /* appearance */
-    };
-    const options = {
-      /* options */
-    };
+
     const result = await stripe.confirmPayment({
       //`Elements` instance that was used to create the Payment Element
       elements,
@@ -40,7 +35,7 @@ class CheckoutForm extends React.Component {
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-        <PaymentElement options={options} />
+        <PaymentElement />
         <button disabled={!this.props.stripe}>Submit</button>
       </form>
     );
@@ -51,7 +46,7 @@ export default function InjectedCheckoutForm() {
   return (
     <ElementsConsumer>
       {({ stripe, elements }) => (
-        <CheckoutForm options={options} stripe={stripe} elements={elements} />
+        <CheckoutForm stripe={stripe} elements={elements} />
       )}
     </ElementsConsumer>
   );
