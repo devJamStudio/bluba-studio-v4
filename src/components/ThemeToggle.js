@@ -3,21 +3,25 @@ import Sun from "../images/sun.svg";
 import Moon from "../images/moon.svg";
 import { useState, useEffect } from "react";
 function getDefaultTheme() {
-  const savedTheme = window.localStorage.getItem("theme");
+  if (typeof window !== "undefined") {
+    const savedTheme = window.localStorage.getItem("theme");
 
-  return savedTheme ? savedTheme : "light";
+    return savedTheme ? savedTheme : "light";
+  }
 }
 
 export default function DarkMode() {
   const [isDark, setIsDark] = useState(getDefaultTheme());
 
   useEffect(() => {
-    if (isDark === "dark") {
-      document.body.classList.add("dark");
-    } else {
-      document.body.classList.remove("dark");
+    if (typeof window !== "undefined") {
+      if (isDark === "dark") {
+        document.body.classList.add("dark");
+      } else {
+        document.body.classList.remove("dark");
+      }
+      window.localStorage.setItem("theme", isDark);
     }
-    window.localStorage.setItem("theme", isDark);
   }, [isDark]);
 
   return (

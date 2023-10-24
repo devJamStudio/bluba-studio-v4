@@ -55,6 +55,7 @@ export default function App(product) {
     },
     rules: {},
   };
+  var appearance = appereanceLight;
   let appereanceDark = {
     variables: {
       fontFamily: "antipol-variable, sans-serif",
@@ -69,9 +70,11 @@ export default function App(product) {
     },
     rules: {},
   };
-  let appearance = appereanceLight;
-  if (window.localStorage.getItem("theme") === "dark") {
-    appearance = appereanceDark;
+  if (typeof window !== "undefined") {
+    let appearance = appereanceLight;
+    if (window.localStorage.getItem("theme") === "dark") {
+      appearance = appereanceDark;
+    }
   }
   const options = {
     clientSecret: clientSecret,
