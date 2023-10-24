@@ -18,6 +18,7 @@ module.exports = {
     "gatsby-plugin-sitemap",
     "gatsby-plugin-sharp",
     "gatsby-transformer-sharp",
+    "@skagami/gatsby-plugin-dark-mode",
     {
       resolve: "gatsby-source-filesystem",
       options: {
@@ -40,6 +41,21 @@ module.exports = {
         ],
         secretKey: process.env.STRIPE_SECRET,
         downloadFiles: true,
+      },
+    },
+    {
+      resolve: "gatsby-plugin-web-font-loader",
+      options: {
+        typekit: {
+          id: process.env.GATSBY_ADOBE_FONT_PROJECT_ID,
+        },
+      },
+    },
+    {
+      resolve: `gatsby-source-contentful`,
+      options: {
+        spaceId: process.env.CONTENTFUL_SPACE_ID,
+        accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
       },
     },
   ],

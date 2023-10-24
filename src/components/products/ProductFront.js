@@ -2,12 +2,11 @@ import React from "react";
 import { graphql, useStaticQuery } from "gatsby";
 import ProductCard from "./ProductCard";
 
-const Products = () => {
-  const data = useStaticQuery(graphql`
-    query ProductsQuery {
+const ProductFrontModule = (id) => {
+  const query = useStaticQuery(graphql`
+    query ProductFrontQuery {
       allContentfulProduct {
         nodes {
-          name
           available
           contentful_id
           color
@@ -33,19 +32,18 @@ const Products = () => {
     }
   `);
 
-  const products = data.allContentfulProduct.nodes;
-
+  const products = query.allContentfulProduct.nodes;
+  const product = products.filter((product) => product.contentful_id === id.id);
+  const productFront = product[0];
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3">
-      {products.map((product) => (
-        <ProductCard
-          key={product.displayName}
-          product={product}
-          image={product.thumbnail?.gatsbyImageData}
-        />
-      ))}
+    <div className="flex">
+      <ProductCard
+        key={product.contentful_id}
+        product={productFront}
+        image={productFront.thumbnail?.gatsbyImageData}
+      />
     </div>
   );
 };
 
-export default Products;
+export default ProductFrontModule;

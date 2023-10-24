@@ -1,0 +1,13 @@
+:root {
+  $white: #fafaf7;
+  $black: #1d2020;
+  $bluba: #bac5ff;
+  $bluba-red: #ffaca0;
+  $bluba-green: #a0ffac;
+  --bluba-black: #{$black};
+  --bluba-white: #{$white};
+  --bluba-red: #{$bluba-red};
+  --bluba-green: #{$bluba-green};
+  --bluba: #{$bluba};
+  --font-antipol: "Antipol", sans-serif;
+}

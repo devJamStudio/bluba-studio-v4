@@ -16,6 +16,9 @@ function SEO({ description, lang, meta, keywords, title }) {
               lang,
             }}
             title={title}
+            bodyAttributes={{
+              class: "bg-white",
+            }}
             titleTemplate={`%s | ${data.site.siteMetadata.title}`}
             meta={[
               {

@@ -1,0 +1,44 @@
+.price {
+  @apply font-antipol pl-1 pt-1 pb-2 text-black;
+}
+// Product card
+.productCard {
+  .image__wrapper {
+    aspect-ratio: 0.95780153;
+    @apply overflow-hidden object-cover relative;
+
+    .gatsby-image-wrapper {
+      @apply absolute object-contain h-full;
+    }
+  }
+}
+//product page
+.product--container {
+  .swiper {
+    @apply w-full h-full;
+  }
+
+  .swiper .swiper-slide {
+    height: auto;
+    .gatsby-image-wrapper {
+      @apply object-cover w-full h-full;
+    }
+  }
+
+  .swiper-slide img {
+    @apply block w-full h-full object-cover;
+  }
+  .product__description {
+    @apply font-antipol text-base;
+
+    font-weight: 400;
+    line-height: 28px; /* 175% */
+    letter-spacing: 0.8px;
+  }
+  .product__info {
+    font-family: var(--font-antipol);
+  }
+  .product__slider {
+    @apply h-[calc(100vh_-_5rem)] lg:h-[calc(100vh_-_8rem)];
+  }
+}

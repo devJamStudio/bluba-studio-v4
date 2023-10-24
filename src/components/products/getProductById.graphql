@@ -1,0 +1,21 @@
+query GetProductById($contentfulId: String!) {
+  allContentfulProduct(contentful_id: { eq: $contentfulId }) {
+    nodes {
+      available
+      color
+      price
+      displayName
+      gallery {
+        gatsbyImageData
+      }
+      height
+      material
+      description {
+        description
+      }
+      thumbnail {
+        gatsbyImageData
+      }
+    }
+  }
+}

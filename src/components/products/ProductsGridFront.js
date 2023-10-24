@@ -2,9 +2,9 @@ import React from "react";
 import { graphql, useStaticQuery } from "gatsby";
 import ProductCard from "./ProductCard";
 
-const Products = () => {
+const ProductFrontModule = () => {
   const data = useStaticQuery(graphql`
-    query ProductsQuery {
+    query ProductFrontGridQuery {
       allContentfulProduct {
         nodes {
           name
@@ -36,10 +36,10 @@ const Products = () => {
   const products = data.allContentfulProduct.nodes;
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3">
+    <div className="grid grid-cols-1 gap-x-10 gap-y-10 m-12 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-5">
       {products.map((product) => (
         <ProductCard
-          key={product.displayName}
+          key={product.name}
           product={product}
           image={product.thumbnail?.gatsbyImageData}
         />
@@ -48,4 +48,4 @@ const Products = () => {
   );
 };
 
-export default Products;
+export default ProductFrontModule;
